@@ -28,3 +28,36 @@ resolveButton.setAttribute('class', 'resolve-button');
 const editButton = document.createElement('button');
 editButton.textContent = 'Edit Ticket';
 editButton.setAttribute('class', 'edit-button')
+
+
+//Task 3 - Converting NodeLists to Arrays for Bulk Updates
+function highlightHighPriorityTickets(){
+    // Select all ticket elements on the page
+    const highPriorityTickets = document.querySelectorAll('.ticket-card');
+    
+   // Convert the NodeList to an array and apply priority-based styling to each ticket
+    const arrTickets = Array.from(highPriorityTickets);
+    arrTickets.forEach((ticket) => {
+        styleSingleCard(ticket);
+    })
+}
+// Function to apply styling based on the ticket's priority level
+function styleSingleCard(currentCard){
+     // Retrieve the priority label from the ticket
+    const priority = currentCard.querySelector('.priority-label');
+        
+    // Check if the ticket has a "High" priority and update the styling accordingly
+    if(priority.textContent.replace('Priority: ', '').toLowerCase() === 'high'){
+        
+        currentCard.classList.remove('other-priority');
+        
+       
+        currentCard.classList.add('high-priority');
+    }
+    else{
+        currentCard.classList.remove('high-priority');
+        currentCard.classList.add('other-priority');
+    }
+}
+addTicket('John H', 'Cannot edit account', 'High');
+addTicket('Lee Jack', 'Page not loaidng', 'Low');
