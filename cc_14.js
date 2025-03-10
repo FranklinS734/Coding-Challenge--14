@@ -31,6 +31,20 @@ function createSupportTicket(customer, issue, priority) {
     resolveBtn.textContent = 'Resolve';
     ticketCard.append(resolveBtn); 
  
+    // Task 4 - Implementing Ticket Resolution with Event Bubbling
+resolveBtn.addEventListener('click', (event) => {
+    // Removes the ticket from the page when the "Resolve" button is clicked
+    ticketCard.remove();
+        
+    // Stops the click event from propagating to parent elements (prevents event bubbling)
+    event.stopPropagation();
+});
+
+// Logs the customer's name when the ticket itself is clicked
+ticketCard.addEventListener('click', () => {
+    console.log('Clicked On Support Ticket:', custName.textContent);
+});
+
  
     // Task 3 - Highlight high-priority tickets
 function highlightHighPriorityTickets() {
