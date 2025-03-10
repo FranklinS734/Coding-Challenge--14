@@ -30,4 +30,31 @@ function createSupportTicket(customer, issue, priority) {
     resolveBtn.setAttribute('class', 'resolve-btn');
     resolveBtn.textContent = 'Resolve';
     ticketCard.append(resolveBtn); 
+ 
+ 
+    // Task 3 - Highlight high-priority tickets
+function highlightHighPriorityTickets() {
+    // Get all tickets currently displayed
+    const highPriorityTickets = document.querySelectorAll('.ticket-card');
+    
+    // Convert NodeList to an array and apply styles based on priority
+    const arrTickets = Array.from(highPriorityTickets);
+    arrTickets.forEach((ticket) => {
+        styleSingleCard(ticket);
+    });
+}
+
+// Apply styles depending on the ticket's priority level
+function styleSingleCard(currentCard) {
+    // Get the priority label from the ticket
+    const priority = currentCard.querySelector('.priority-label');
+        
+    // If the priority is "High", apply the correct styling
+    if (priority.textContent.replace('Priority: ', '').toLowerCase() === 'high') {
+        currentCard.classList.remove('other-priority'); // Remove any non-high styles
+        currentCard.classList.add('high-priority'); // Add high-priority styling
+    } else {
+        currentCard.classList.remove('high-priority'); 
+        currentCard.classList.add('other-priority'); // Default styling for non-high-priority tickets
+    }
 }
